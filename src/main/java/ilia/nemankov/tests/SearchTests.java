@@ -16,8 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SearchTests {
@@ -60,6 +59,25 @@ public class SearchTests {
         wait.until(presenceOfElementLocated(By.xpath(MainPage.FIRST_FOUND_ARTICLE_XPATH)));
 
         assertEquals("Китай запустит два зонда за пределы Солнечной системы", mainPage.getFirstFoundArticle().getText());
+    }
+
+    @Test
+    public void clearAndSearchTest() {
+        driver.get(MainPage.PAGE_URL);
+
+        wait.until(presenceOfElementLocated(By.xpath(MainPage.SEARCH_ELEMENT_XPATH)));
+
+        mainPage.searchNewByText("Китай запустил зонд");
+
+        wait.until(presenceOfElementLocated(By.xpath(MainPage.FIRST_FOUND_ARTICLE_XPATH)));
+
+        mainPage.getClearSearchElement().click();
+
+        mainPage.searchNewByText("Продажи туров в Сочи выросли");
+
+        wait.until(presenceOfElementLocated(By.xpath(MainPage.FIRST_FOUND_ARTICLE_XPATH)));
+
+        assertEquals("Продажи туров в Сочи на фоне закрытой Турции выросли на 25%", mainPage.getFirstFoundArticle().getText());
     }
 
     @Test

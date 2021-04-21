@@ -27,6 +27,7 @@ public class MainPage {
     public static final String SHOW_BUSINESS_CATEGORY_XPATH = "//div[@id='navigation']/nav/div/div/div[2]/div/div[2]/div[3]/a";
 
     public static final String SEARCH_ELEMENT_XPATH = "//div[@id='content']/div/div/div[2]/div/div/input";
+    public static final String CLEAR_SEARCH_ELEMENT_XPATH = "//div[@id='content']/div[1]/div/div/div/button";
     public static final String FIRST_FOUND_ARTICLE_XPATH = "//div[@id='content']/div[2]/div[2]/a[2]/div/div/div/p";
 
     public static final String FIRST_NEW_XPATH = "//div[@id='content']/div[3]/div[3]/div/div/a[2]/span";
@@ -37,6 +38,9 @@ public class MainPage {
     public static final String ENABLE_ALL_SOURCES_BUTTON_XPATH = "//div[@id='modal']/div[2]/div[2]/div[2]/button";
     public static final String SEARCH_SOURCE_ELEMENT_XPATH = "//div[@id='modal']/div[2]/div[2]/div/input";
     public static final String ENABLE_FIRST_SOURCE_SWITCH_XPATH = "//div[@id='modal']/div[2]/div[3]/div/div/div/div/div/div/div";
+
+    public static final String OPEN_ALL_BUTTON_XPATH = "//div[@id='content']/div[3]/div/div/a";
+    public static final String REGION_XPATH = "//div[@id='navigation']/div/div/div[2]/div/div[6]/button/span";
 
     private final WebDriver driver;
 
@@ -76,6 +80,9 @@ public class MainPage {
     @FindBy(xpath = SEARCH_ELEMENT_XPATH)
     private WebElement searchElement;
 
+    @FindBy(xpath = CLEAR_SEARCH_ELEMENT_XPATH)
+    private WebElement clearSearchElement;
+
     @FindBy(xpath = FIRST_FOUND_ARTICLE_XPATH)
     private WebElement firstFoundArticle;
 
@@ -99,6 +106,12 @@ public class MainPage {
 
     @FindBy(xpath = ENABLE_ALL_SOURCES_BUTTON_XPATH)
     private WebElement enableAllSourcesButton;
+
+    @FindBy(xpath = OPEN_ALL_BUTTON_XPATH)
+    private WebElement openAllButton;
+
+    @FindBy(xpath = REGION_XPATH)
+    private WebElement region;
 
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);

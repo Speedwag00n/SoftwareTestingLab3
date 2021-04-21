@@ -14,8 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class NewsTests {
@@ -74,6 +73,17 @@ public class NewsTests {
         mainPage.getFirstNewFullButton().click();
 
         wait.until(presenceOfElementLocated(By.xpath(MainPage.READ_MORE_BUTTON_XPATH)));
+    }
+
+    @Test
+    public void openAllTest() {
+        driver.get(MainPage.PAGE_URL);
+
+        wait.until(presenceOfElementLocated(By.xpath(MainPage.OPEN_ALL_BUTTON_XPATH)));
+
+        mainPage.getOpenAllButton().click();
+
+        wait.until(invisibilityOfElementLocated(By.xpath(MainPage.OPEN_ALL_BUTTON_XPATH)));
     }
 
 }
