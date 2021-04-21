@@ -8,11 +8,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -84,6 +88,29 @@ public class NewsTests {
         mainPage.getOpenAllButton().click();
 
         wait.until(invisibilityOfElementLocated(By.xpath(MainPage.OPEN_ALL_BUTTON_XPATH)));
+    }
+
+    @Test
+    public void disableSourceTest() throws InterruptedException {
+        driver.get(MainPage.PAGE_URL);
+
+        wait.until(presenceOfElementLocated(By.xpath(MainPage.SOURCES_BUTTON_XPATH)));
+
+        mainPage.getSourcesButton().click();
+
+        wait.until(elementToBeClickable(By.xpath(MainPage.SEARCH_SOURCE_ELEMENT_XPATH)));
+
+        mainPage.getEnableAllSourcesButton().click();
+
+        mainPage.searchSourceByText("RT");
+
+        mainPage.getEnableFirstSourceSwitch().click();
+
+        Thread.sleep(2000);
+
+        List<WebElement> elements = driver.findElements(By.xpath("//a[contains(@href, '/publisher/236')]"));
+
+        assertEquals(0, elements.size());
     }
 
 }

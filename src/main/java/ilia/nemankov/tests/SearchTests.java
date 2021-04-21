@@ -80,27 +80,4 @@ public class SearchTests {
         assertEquals("Продажи туров в Сочи на фоне закрытой Турции выросли на 25%", mainPage.getFirstFoundArticle().getText());
     }
 
-    @Test
-    public void disableSourceTest() throws InterruptedException {
-        driver.get(MainPage.PAGE_URL);
-
-        wait.until(presenceOfElementLocated(By.xpath(MainPage.SOURCES_BUTTON_XPATH)));
-
-        mainPage.getSourcesButton().click();
-
-        wait.until(elementToBeClickable(By.xpath(MainPage.SEARCH_SOURCE_ELEMENT_XPATH)));
-
-        mainPage.getEnableAllSourcesButton().click();
-
-        mainPage.searchSourceByText("RT");
-
-        mainPage.getEnableFirstSourceSwitch().click();
-
-        Thread.sleep(2000);
-
-        List<WebElement> elements = driver.findElements(By.xpath("//a[contains(@href, '/publisher/236')]"));
-
-        assertEquals(0, elements.size());
-    }
-
 }
