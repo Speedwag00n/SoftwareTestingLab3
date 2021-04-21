@@ -74,9 +74,13 @@ public class NewsTests {
 
         wait.until(elementToBeClickable(By.xpath(MainPage.FIRST_NEW_FULL_BUTTON_XPATH)));
 
+        String initialUrl = driver.getCurrentUrl();
+
         mainPage.getFirstNewFullButton().click();
 
         wait.until(presenceOfElementLocated(By.xpath(MainPage.READ_MORE_BUTTON_XPATH)));
+
+        assertNotEquals(initialUrl, driver.getCurrentUrl());
     }
 
     @Test
@@ -88,6 +92,8 @@ public class NewsTests {
         mainPage.getOpenAllButton().click();
 
         wait.until(invisibilityOfElementLocated(By.xpath(MainPage.OPEN_ALL_BUTTON_XPATH)));
+
+        assertEquals("СМИ2 - Санкт-Петербург", driver.getTitle());
     }
 
     @Test
